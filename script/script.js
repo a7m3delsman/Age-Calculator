@@ -93,6 +93,7 @@ function show(){
 }
 function close(){
     mainMenu.style.top = '-150%';
+return;
 }
 var audio = new Audio('button-click.mp3');
 function playClickSound() {
