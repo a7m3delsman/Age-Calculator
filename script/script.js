@@ -1,102 +1,102 @@
-function calculateAge() {
-  var birthdateInput = document.getElementById("birthdate").value;
+let autoUpdateInterval = null;
+        
+        function startCalculation() {
+            playClickSound();
+            calculateAge();
+            
+            // إيقاف أي تحديث سابق إذا كان موجوداً
+            if (autoUpdateInterval) {
+                clearInterval(autoUpdateInterval);
+            }
+            
+            // بدء التحديث التلقائي كل ثانية
+            autoUpdateInterval = setInterval(calculateAge, 1000);
+        }
+        
+        function calculateAge() {
+            const birthdateInput = document.getElementById("birthdate").value;
+            
+            if (!birthdateInput) {
+                document.getElementById("result").innerHTML = "<b>Please enter a birthdate.😒</b>";
+                document.body.style.backgroundImage =null;
 
-  // التحقق من إدخال التاريخ
-  if (birthdateInput === "") {
-    document.getElementById("result").innerHTML = "<b>Please enter a birthdate.😒</b>";
-    return;
-  }
-
-  var birthdate = new Date(birthdateInput);
-  var currentDate = new Date();
-
-  
-  // التحقق من التاريخ القريب
-  var timeDifference = currentDate.getTime() - birthdate.getTime();
-  var daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-  if (daysDifference < 365) {
-    document.body.style.backgroundImage ="none";
-    document.getElementById("Beautiful-message").innerHTML="";
-    document.getElementById("result").innerHTML = "Warning: The entered birthdate is less than a year ago.";
-  }
-
-  var years = currentDate.getUTCFullYear() - birthdate.getUTCFullYear();
-  var months = currentDate.getUTCMonth() - birthdate.getUTCMonth();
-  var days = currentDate.getUTCDate() - birthdate.getUTCDate();
-  var hours = currentDate.getUTCHours() - birthdate.getUTCHours();
-  var minutes = currentDate.getUTCMinutes() - birthdate.getUTCMinutes();
-  var seconds = currentDate.getUTCSeconds() - birthdate.getUTCSeconds();
-
-  if (months < 0 || (months === 0 && days < 0)) {
-    years--;
-  }
-
-  if (days < 0) {
-    months--;
-    days += 30.436875;
-  }
-
-  if (hours < 0) {
-    days--;
-    hours += 24;
-  }
-
-  if (minutes < 0) {
-    hours--;
-    minutes += 60;
-  }
-
-  if (seconds < 0) {
-    minutes--;
-    seconds += 60;
-  }
-
- 
-  var result = years + " : years<br>" + months + " : months<br>" + days + " : days<br>" +( hours+3) + " : hours<br>" + minutes + " : minutes<br> " + seconds + " : seconds";
-
-  document.getElementById("result").innerHTML = "<h3 class='your-age'> Your age is : </h3>" + result;
-  document.body.style.backgroundImage ="none";
-  document.getElementById("Beautiful-message").innerHTML="<br>I wish for you a long life. ❤️😊";
-  if( months===0 && days===0 )
-  {
-    document.body.style.backgroundImage ="url('images/birthday-background.png')";
-    document.getElementById("Beautiful-message").innerHTML="Today is your birthday.🤩 Happy birthday and I hope you have a beautiful day 🎂🎈";
-  }
-  // التحقق من صحة التاريخ
-  if (birthdate > currentDate) {
-    document.getElementById("result").innerHTML = "<b class='Invalid-birthdate'>Invalid birthdate.</b> Please enter a valid date.😕";
-    document.body.style.backgroundImage ="none";
-    document.getElementById("Beautiful-message").innerHTML="";
-    return;
-  }
-
-}
-
-const mainMenu = document.querySelector('.mainMenu');
-const closeMenu = document.querySelector('.closeMenu');
-const openMenu = document.querySelector('.openMenu');
-const menu_items = document.querySelectorAll('nav .mainMenu li a');
-
-openMenu.addEventListener('click',show);
-closeMenu.addEventListener('click',close);
-
-
-menu_items.forEach(item => {
-    item.addEventListener('click',function(){
-        close();
-    })
-})
-
-function show(){
-    mainMenu.style.display = 'flex';
-    mainMenu.style.top = '0%';
-}
-function close(){
-    mainMenu.style.top = '-150%';
-return;
-}
-var audio = new Audio('button-click.mp3');
-function playClickSound() {
-    clickSound.currentTime = 0;
-    clickSound.play();
-  }
+                document.getElementById("Beautiful-message").innerHTML = "";
+                document.body.classList.remove("birthday");
+                return;
+            }
+            
+            const birthdate = new Date(birthdateInput);
+            const now = new Date();
+            
+            if (birthdate > now) {
+                document.getElementById("result").innerHTML = "<b class='Invalid-birthdate'>Invalid birthdate.</b> Please enter a valid date.😕";
+                document.getElementById("Beautiful-message").innerHTML = "";
+                document.body.style.backgroundImage =null;
+                document.body.classList.remove("birthday");
+                return;
+            }
+            
+            let years = now.getFullYear() - birthdate.getFullYear();
+            let months = now.getMonth() - birthdate.getMonth();
+            let days = now.getDate() - birthdate.getDate();
+            let hours = now.getHours() - birthdate.getHours();
+            let minutes = now.getMinutes() - birthdate.getMinutes();
+            let seconds = now.getSeconds() - birthdate.getSeconds();
+            
+            // تصحيح القيم السالبة
+            if (seconds < 0) {
+                seconds += 60;
+                minutes--;
+            }
+            
+            if (minutes < 0) {
+                minutes += 60;
+                hours--;
+            }
+            
+            if (hours < 0) {
+                hours += 24;
+                days--;
+            }
+            
+            if (days < 0) {
+                const lastDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+                days = lastDayOfMonth - birthdate.getDate() + now.getDate();
+                months--;
+            }
+            
+            if (months < 0) {
+                months += 12;
+                years--;
+            }
+            
+            const result = `
+                ${years} : years<br>
+                ${months} : months<br>
+                ${days} : days<br>
+                ${hours} : hours<br>
+                ${minutes} : minutes<br>
+                ${seconds} : seconds
+            `;
+            
+            document.getElementById("result").innerHTML = "<h3 class='your-age'> Your age is </h3>" + result;
+            
+            // التحقق من عيد الميلاد
+            if (now.getMonth() === birthdate.getMonth() && now.getDate() === birthdate.getDate()) {
+                document.body.classList.add("birthday");
+                document.body.style.backgroundImage ="url('images/birthday-background.png')";
+                document.getElementById("Beautiful-message").innerHTML = "Today is your birthday.🤩 Happy birthday and I hope you have a beautiful day 🎂🎈";
+            } else {
+                document.body.classList.remove("birthday");
+                document.body.style.backgroundImage =null;
+                document.getElementById("Beautiful-message").innerHTML = "I wish for you a long life. ❤️😊";
+            }
+        }
+        
+        function playClickSound() {
+            const clickSound = document.getElementById("clickSound");
+            clickSound.currentTime = 0;
+            clickSound.play();
+        }
+        
+        
