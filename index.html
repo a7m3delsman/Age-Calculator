@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,80 +9,44 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
     <link rel="stylesheet" href="styles/styles.css">
     <meta name="og:type" content="website">
-    <meta name="og:locale" content="en,ar">
+    <meta name="og:locale" content="en">
+    <meta property="og:url" content="https://a7m3delsman.github.io/Age-Calculator/" />
     <meta name="author" content="Ahmed ELsaman">
     <meta name="robots" content="index, follow">
+    <meta property="og:locale" content="en_US" />
     <meta name="description" content="A website to calculate your age accurately-موقع لحساب عمرك بدقة">
     <meta name="keywords" content=" age , html, js, css, calculate , calc,birthdate ,birthday,website,date ,github">
     <meta name="og:title" content="𝔸𝔾𝔼 ℂ𝔸𝕃ℂ𝕌𝕃𝔸𝕋𝕆ℝ">
     <meta name="og:description" content="A website to calculate your age accurately-موقع لحساب عمرك بدقة">
     <meta name="og:image" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKbmwnD9BXAcKLvhMDD1LnIcodwge5oB7HHw&usqp=CAU">
-   
+   <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2XRDCC9R80"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2XRDCC9R80');
+</script>
 </head>
 <body>
-    <nav>
-    
-        <div title="About Me" class="openMenu"><i class="fa fa-bars"></i></div>
-        <ul class="mainMenu">
-          <div title="Close" class="closeMenu"><i class="fa fa-times"></i></div>
-            
-        <center>
+  <div>
+    <a style="text-decoration: none; color: rgb(0, 0, 0);" target="_blank" href="https://a7m3delsman.github.io/MyProfile/" >
+    <div title="About Developer" id="user-icon" >
       
-          <div style="background-color: black; animation-delay: 0ms;" >
-            <br>
-          <h1 style="color: rgb(207, 169, 17); font-size: 25px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">This WebSite Was Designed By :  <b style="color: blueviolet;">Ahmed ELsaman</b></h1>
-          
-          <h2 style="color: rgb(220, 255, 252); margin-bottom: 30px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">You Can Contact Me In : </h2><br>
-          
-          
-        </div>
-        </center>
-        <div class="social">
-          <div class="text2">
-            <div class="text3" title="my facebook"> 
-              <a href="https://www.facebook.com/ahmed.elsaman.5099?mibextid=ZbWKwL"  target="_blank"><i class="fab fa-facebook-f"></i></a>
-            </div>
-            <span style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Facebook</span>
-          </div> 
-          
-          <div class="text2">
-            <div class="text3"  title="my github"> 
-              <a href="https://github.com/a7m3delsman" target="_blank"><i class="fab fa-github"></i></a>
-            </div>
-            <span  style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">GitHub</span>
-          </div>
-          
-          <div class="text2">
-            <div class="text3" title="my instagram"> 
-              <a href="https://instagram.com/a7med_3lsaman?igshid=ZDc4ODBmNjlmNQ==" target="_blank"><i class="fab fa-instagram"></i></a>
-            </div>
-            <span  style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Instagram</span>
-          </div>
-          
-          <div class="text2">
-            <div class="text3"  title="my WhatsApp"> 
-              <a href="https://wa.me/qr/PQKNYIJANYQKJ1" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            </div>
-            <span style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">WhatsApp</span>
-          </div>
-          
-          </div>
-          <footer style="background-color: black; margin-top: -30px; margin-bottom: -30px; text-align: center;">
-          <br><br>
-          <p title="Copy Rights" style="font-size: 15px; color: rgba(220, 255, 245, 0.829); margin-top: -5px;font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">&copy; 2023 Ahmed EL-Saman. All Rights Reserved.</p>
-          <br>
-          </footer>
-          </div>
-        </ul>
-    </nav>
+      <i  class="fa fa-user"></i>
+      </div>
+    </a>
+  </div>
+  <br><br>  <br><br>
     <section>
     <div class="container">
         <h1>Age Calculator</h1>
         <label style="color: rgb(0, 150, 150);" for="birthdate">Enter Date of Birth :</label>
         <input title="Choose your date of birth" type="date" name="birthdate" id="birthdate">
         <br>
-        <button onclick="calculateAge(); playClickSound();">Calculate Age</button>
-        <br>
+        <button onclick="startCalculation()">Calculate Age</button>
+      
         <div id="result"></div>
         <div id="Beautiful-message"></div>
     </div>
